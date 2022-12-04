@@ -56,14 +56,8 @@ public class Application {
 	}
 	
 	private static void doBattle() {
-		//runs the battle through the battlemanager object.
-		displayResults();
-	}
-	
-	
-	private static void displayResults() {
-		//displays the results of the Battle. 
-		System.out.println("PLACEHOLDER RESULTS");
+		//runs the battle through the Manager object.
+		thisBattle.createCombatantsArray();
 	}
 	
 	
