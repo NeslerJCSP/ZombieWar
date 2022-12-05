@@ -32,7 +32,7 @@ public class Manager {
      */
     public void createCombatantsArray() {
         Random random = new Random();
-        combatants = new Combatant[random.nextInt(10 - 2 + 1) + 2];
+        combatants = new Combatant[random.nextInt(20 - 2 + 1) + 2];
         for (int i = 0; i < combatants.length; i++) {
             combatants[i] = generateCharacter(random.nextInt(5));
         }

@@ -8,7 +8,7 @@ import java.util.Scanner;  // Import the Scanner class
 
 public class Application {
 
-	//public battleManager thisBattle = new battleManager();
+	public static Manager thisBattle;
 	public static boolean running = true;
 	public static Scanner in;
 	
@@ -57,7 +57,9 @@ public class Application {
 	
 	private static void doBattle() {
 		//runs the battle through the Manager object.
+		thisBattle = new Manager();
 		thisBattle.createCombatantsArray();
+		
 	}
 	
 	
