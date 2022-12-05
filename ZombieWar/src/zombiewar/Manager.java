@@ -25,14 +25,12 @@ public class Manager {
     private ArrayList<String> names = new ArrayList<>();
 
     /**
-     * createCombatantsArray().This method randomly generates an array of
+     * createCombatantsArray(). This method randomly generates an array of
      * Zombies and Survivors. The length of the array is randomly generated as
      * well. After the array is generated, this method calls the beginBattle()
      * method to begin the battle.
-     *
-     * @return Boolean
      */
-    public boolean createCombatantsArray() {
+    public void createCombatantsArray() {
         Random random = new Random();
         combatants = new Combatant[random.nextInt(20 - 2 + 1) + 2];
         for (int i = 0; i < combatants.length; i++) {
@@ -42,12 +40,11 @@ public class Manager {
         System.out.println("But there are " + numberOfZombies + " zombies waiting for them.");
 
         if (numberOfSurvivors == combatants.length) {
-            return false;
+            System.out.println("Try Again, this array only contains humans.");
         } else if (numberOfZombies == combatants.length) {
-            return false;
+            System.out.println("Try again, this array only contains zombies.");
         } else {
             beginBattle();
-            return true;
         }
     }
 
