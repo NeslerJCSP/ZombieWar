@@ -57,6 +57,7 @@ public class Application {
 	
 	private static void doBattle() {
 		//runs the battle through the Manager object.
+		thisBattle = new Manager();
 		thisBattle.createCombatantsArray();
 	}
 	
