@@ -8,7 +8,7 @@ import java.util.Scanner;  // Import the Scanner class
 
 public class Application {
 
-	public Manager thisBattle = new Manager();
+	public static Manager thisBattle = new Manager();
 	public static boolean running = true;
 	public static Scanner in;
 	
