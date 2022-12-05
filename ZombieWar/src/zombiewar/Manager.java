@@ -6,7 +6,6 @@ package zombiewar;
 import java.util.ArrayList;
 import java.util.Random;
 
-
 /**
  *
  * @author Eric Oliphant
@@ -15,11 +14,11 @@ public class Manager {
 
     //instance variables
     private Combatant[] combatants;
-    private int numberOfChildren=0;
-    private int numberOfTeachers=0;
-    private int numberOfSoldiers=0;
-    private int numberOfCommonInfected=0;
-    private int numberOfTanks=0;
+    private int numberOfChildren = 0;
+    private int numberOfTeachers = 0;
+    private int numberOfSoldiers = 0;
+    private int numberOfCommonInfected = 0;
+    private int numberOfTanks = 0;
     private int numberOfSurvivors = 0;
     private int numberOfZombies = 0;
     private ArrayList<String> names = new ArrayList<>();
@@ -36,8 +35,8 @@ public class Manager {
         for (int i = 0; i < combatants.length; i++) {
             combatants[i] = generateCharacter(random.nextInt(5));
         }
-        System.out.println("We have " + numberOfSurvivors + " survivors trying to make it to safety.");
-        System.out.println("But there are " + numberOfZombies + " zombies waiting for them.");
+        System.out.println("We have " + numberOfSurvivors + " survivors trying to make it to safety (" + numberOfChildren + " children, " + numberOfTeachers + " teachers, " + numberOfSoldiers + " soldiers)");
+        System.out.println("But there are " + numberOfZombies + " zombies waiting for them (" + numberOfCommonInfected + " common infected, " + numberOfTanks + " tanks)");
 
         if (numberOfSurvivors == combatants.length) {
             System.out.println("Try Again, this array only contains humans.");
@@ -64,14 +63,20 @@ public class Manager {
                     } else {
                         if (!(combatants[i].getCombatantType().equals(combatants[j].getCombatantType()))) {
                             combatants[i].attack(combatants[j]);
+                            if (combatants[j].isDead()) {
+                                System.out.println(names.get(i) + " killed " + names.get(j));
+                            }
                         }
                     }
 
                 }
             }
         }
-        System.out.println("It seems " + numberOfRemainingHumans() + " survivors have made it to safety.");
-
+        if (numberOfRemainingHumans() == 0) {
+            System.out.println("None of the survivors made it to safety.");
+        } else {
+            System.out.println("It seems " + numberOfRemainingHumans() + " survivors have made it to safety.");
+        }
     }
 
     /**
@@ -116,26 +121,31 @@ public class Manager {
         switch (number) {
             case 0:
                 CommonInfect commonInfect = new CommonInfect();
+                names.add("CommonInfected " + numberOfCommonInfected);
                 numberOfCommonInfected++;
                 numberOfZombies++;
                 return commonInfect;
             case 1:
                 Tank tank = new Tank();
+                names.add("Tank " + numberOfTanks);
                 numberOfTanks++;
                 numberOfZombies++;
                 return tank;
             case 2:
                 Child child = new Child();
+                names.add("Child " + numberOfChildren);
                 numberOfChildren++;
                 numberOfSurvivors++;
                 return child;
             case 3:
                 Teacher teacher = new Teacher();
+                names.add("Teacher " + numberOfTeachers);
                 numberOfTeachers++;
                 numberOfSurvivors++;
                 return teacher;
             default:
                 Soldier soldier = new Soldier();
+                names.add("Soldier " + numberOfSoldiers);
                 numberOfSoldiers++;
                 numberOfSurvivors++;
                 return soldier;
