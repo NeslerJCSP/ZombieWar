@@ -58,7 +58,11 @@ public class Application {
 	private static void doBattle() {
 		//runs the battle through the Manager object.
 		thisBattle = new Manager();
-		thisBattle.createCombatantsArray();
+		while(running) {
+			//in the case that Manager generates an array of only humans or zombies, it recreates
+			running = !thisBattle.createCombatantsArray();
+		}
+		
 	}
 	
 	
