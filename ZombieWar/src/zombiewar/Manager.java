@@ -40,8 +40,10 @@ public class Manager {
 
         if (numberOfSurvivors == combatants.length) {
             System.out.println("Try Again, this array only contains humans.");
+            createCombatantsArray();
         } else if (numberOfZombies == combatants.length) {
             System.out.println("Try again, this array only contains zombies.");
+            createCombatantsArray();
         } else {
             beginBattle();
         }
