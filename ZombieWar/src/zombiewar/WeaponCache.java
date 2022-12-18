@@ -9,9 +9,8 @@ package zombiewar;
  * @author Mobile Gaming
  */
 class WeaponCache {
-    
+
     protected static final String WEAPON = "Weapon";
- 
 
 // Instance variables
     private String weaponType;
@@ -23,11 +22,17 @@ class WeaponCache {
         this.attack = attack;
         this.accuracy = accuracy;
     }
- 
+
     public String getWeaponType() {
         return this.weaponType;
     }
- 
-}
 
-    
+    public int getAttack() {
+        return this.attack;
+    }
+
+    public float getAccuracy() {
+        return this.accuracy;
+    }
+
+}

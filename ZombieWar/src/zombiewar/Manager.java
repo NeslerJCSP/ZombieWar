@@ -22,6 +22,7 @@ public class Manager {
     private int numberOfSurvivors = 0;
     private int numberOfZombies = 0;
     private ArrayList<String> names = new ArrayList<>();
+    private WeaponCache[] weaponCache;
 
     /**
      * createCombatantsArray(). This method randomly generates an array of
@@ -35,6 +36,7 @@ public class Manager {
         for (int i = 0; i < combatants.length; i++) {
             combatants[i] = generateCharacter(random.nextInt(5));
         }
+        generateWeaponCacheArray();
         System.out.println("We have " + numberOfSurvivors + " survivors trying to make it to safety (" + numberOfChildren + " children, " + numberOfTeachers + " teachers, " + numberOfSoldiers + " soldiers)");
         System.out.println("But there are " + numberOfZombies + " zombies waiting for them (" + numberOfCommonInfected + " common infected, " + numberOfTanks + " tanks)");
 
@@ -64,9 +66,19 @@ public class Manager {
 
                     } else {
                         if (!(combatants[i].getCombatantType().equals(combatants[j].getCombatantType()))) {
-                            combatants[i].attack(combatants[j]);
-                            if (combatants[j].isDead()) {
+                            if (combatants[i].getCombatantType().equals("Survivor")) {
+                                Random random = new Random();
+                                float number = random.nextFloat();
+                                if (number <= weaponCache[i].getAccuracy()) {
+                                    combatants[i].attack(combatants[j], weaponCache[i]);
+                                }
+                            } else {
+                                combatants[i].attack(combatants[j]);
+                            }
+                            if (combatants[j].isDead() && combatants[i].getCombatantType().equals("Zombie")) {
                                 System.out.println(names.get(i) + " killed " + names.get(j));
+                            } else if (combatants[j].isDead() && combatants[i].getCombatantType().equals("Survivor")) {
+                                System.out.println(names.get(i) + " killed " + names.get(j) + " with a/an " + weaponCache[i]);
                             }
                         }
                     }
@@ -151,6 +163,58 @@ public class Manager {
                 numberOfSoldiers++;
                 numberOfSurvivors++;
                 return soldier;
+        }
+    }
+
+    /**
+     * generateWeaponCacheArray(). This method randomly generates an array of
+     * WeaponCache classes.
+     */
+    public void generateWeaponCacheArray() {
+        weaponCache = new WeaponCache[combatants.length];
+        Random random = new Random();
+
+        for (int i = 0; i < weaponCache.length; i++) {
+            if (combatants[i].getCombatantType().equals("Survivor")) {
+                weaponCache[i] = generateWeapon(random.nextInt(8));
+
+            }
+
+        }
+    }
+
+    /**
+     * generateWeapon(int number). This method generates a WeaponCache class.
+     *
+     * @param number int
+     * @return WeaponCache
+     */
+    public WeaponCache generateWeapon(int number) {
+        switch (number) {
+            case 0:
+                AssaultRifle assaultRifle = new AssaultRifle();
+                return assaultRifle;
+            case 1:
+                Axe axe = new Axe();
+                return axe;
+            case 2:
+                Crowbar crowbar = new Crowbar();
+                return crowbar;
+            case 3:
+                Fists fists = new Fists();
+                return fists;
+            case 4:
+                Fryingpan fryingpan = new Fryingpan();
+                return fryingpan;
+            case 5:
+                Pistol pistol = new Pistol();
+                return pistol;
+            case 6:
+                Shotgun shotgun = new Shotgun();
+                return shotgun;
+            default:
+                SubmachineGun submachineGun = new SubmachineGun();
+                return submachineGun;
         }
     }
 }

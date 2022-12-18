@@ -27,6 +27,10 @@ public class Combatant {
         combatant.health = combatant.health - this.attack;
     }
 
+    public void attack(Combatant combatant, WeaponCache weapon) {
+        combatant.health = combatant.health - weapon.getAttack();
+    }
+
     public String getCombatantType() {
         return this.combatantType;
     }
