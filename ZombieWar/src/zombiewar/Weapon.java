@@ -14,7 +14,7 @@ public class Weapon extends WeaponCache{
 protected static final String FISTS = "Fists";
 protected static final String PISTOL = "Pistol";
 protected static final String SHOTGUN = "Shotgun";
-protected static final String MACHINEGUN = "Machinegun";
+protected static final String SUBMACHINEGUN = "SubmachineGun";
 protected static final String ASSAULTRIFLE = "AssaultRifle";
 protected static final String AXE = "Axe";
 protected static final String CROWBAR = "Crowbar";
